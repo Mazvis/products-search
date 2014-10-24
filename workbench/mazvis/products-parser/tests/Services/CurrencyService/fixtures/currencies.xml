@@ -1,0 +1,45 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Exchange Rates For Euro</title>
+        <link>http://themoneyconverter.com/EUR/Exchange_Rates_For_Euro.aspx</link>
+        <description>RSS Exchange Rate Feed for Euro</description>
+        <lastBuildDate>Sat, 18 Oct 2014 08:17:41 GMT</lastBuildDate>
+        <language>en-US</language>
+        <copyright>Copyright: (C) The Money Converter, see http://themoneyconverter.com </copyright>
+        <docs>http://themoneyconverter.com/RSSFeeds.aspx</docs>
+        <ttl>61</ttl>
+        <image>
+            <title>Exchange Rates For Euro</title>
+            <url>http://themoneyconverter.com/images/TheMoneyConverter_sml.jpg</url>
+            <link>http://themoneyconverter.com/EUR/Exchange_Rates_For_Euro.aspx</link>
+        </image>
+        <item>
+            <title>EUR/EUR</title>
+            <link>http://themoneyconverter.com/EUR/EUR.aspx</link>
+            <pubDate>Sat, 18 Oct 2014 00:00:00 GMT</pubDate>
+            <description>1 Euro = 1.00000 Euro</description>
+            <category>Europe</category>
+        </item>
+        <item>
+            <title>LTL/EUR</title>
+            <link>http://themoneyconverter.com/EUR/LTL.aspx</link>
+            <pubDate>Sat, 18 Oct 2014 00:00:00 GMT</pubDate>
+            <description>1 Euro = 3.45280 Lithuanian Litas</description>
+            <category>Europe</category>
+        </item>
+        <item>
+            <title>RUB/EUR</title>
+            <link>http://themoneyconverter.com/EUR/RUB.aspx</link>
+            <pubDate>Sat, 18 Oct 2014 08:17:41 GMT</pubDate>
+            <description>1 Euro = 51.96870 Russian Rouble</description>
+            <category>Europe</category>
+        </item>
+        <item>
+            <title>USD/EUR</title>
+            <link>http://themoneyconverter.com/EUR/USD.aspx</link>
+            <pubDate>Sat, 18 Oct 2014 08:17:41 GMT</pubDate>
+            <description>1 Euro = 1.27606 United States Dollar</description>
+            <category>North America</category>
+        </item>
+    </channel>
+</rss>

@@ -1,0 +1,28 @@
+{
+    "name": "mazvis/products-parser",
+    "description": "",
+    "authors": [
+        {
+            "name": "Mazvis",
+            "email": "sivzam@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*",
+
+        "phpunit/phpunit": "4.1.*",
+        "guzzle/guzzle": "~3.7",
+        "guzzlehttp/guzzle": "4.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations",
+            "src/models"
+        ],
+        "psr-0": {
+            "Mazvis\\ProductsParser\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
