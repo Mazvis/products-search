@@ -2,6 +2,8 @@
 
 namespace Mazvis\ProductsParser\Services\CurrencyService;
 
+use Mazvis\ProductsParser\Services\Downloader;
+
 class CurrencyService
 {
     /** @var string */
@@ -9,16 +11,23 @@ class CurrencyService
     /** @var string */
     protected $baseCurrency = 'EUR';
     /** @var string  */
-    protected $pathToSave = 'currencies.json';
+    protected $pathToSave = '../app/data/currencies';
+    /** @var string  */
+    protected $fileName = 'currencies.json';
+    /** @var  Downloader */
+    protected $downloader;
 
     /** @var array */
     protected $currencies = [];
 
+    /**
+     * Save currencies
+     */
     public function getCurrentCurrencies()
     {
-        $content = file_get_contents($this->currenciesLink);
+        $content = $this->downloader->getContent($this->currenciesLink);
 
-        if ($content != '') {
+        if ($content) {
             $xml = simplexml_load_string($content);
             if ($xml) {
                 /** @var \SimpleXmlElement $channel */
@@ -47,12 +56,26 @@ class CurrencyService
     }
 
     /**
+     * @param $dirName
+     */
+    protected function createDir($dirName)
+    {
+        if (!file_exists($dirName)) {
+            mkdir($dirName, 0777, true);
+        }
+    }
+
+    /**
      * Save downloaded currencies
      */
     public function saveCurrencies()
     {
         if (!empty($this->currencies)) {
-            file_put_contents($this->pathToSave, json_encode($this->currencies));
+            $this->createDir($this->pathToSave);
+            file_put_contents(
+                $this->pathToSave . DIRECTORY_SEPARATOR . $this->fileName,
+                json_encode($this->currencies)
+            );
         }
     }
 
@@ -70,6 +93,22 @@ class CurrencyService
     public function setPathToSave($pathToSave)
     {
         $this->pathToSave = $pathToSave;
+    }
+
+    /**
+     * @param string $fileName
+     */
+    public function setFileName($fileName)
+    {
+        $this->fileName = $fileName;
+    }
+
+    /**
+     * @param Downloader $downloader
+     */
+    public function setDownloader($downloader)
+    {
+        $this->downloader = $downloader;
     }
 
     /**

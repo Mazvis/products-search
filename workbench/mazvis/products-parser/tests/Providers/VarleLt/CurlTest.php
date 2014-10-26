@@ -323,17 +323,6 @@ class CurlTest extends \PHPUnit_Framework_TestCase
 
         $current = $curl->curlData($this->getFixturePath($fixtures[0]));
 
-        $aa = ['Mazvis\ProductsParser\Models\Product', 'Mazvis\ProductsParser\Providers\VarleLt\Services\Curl'];
-        foreach ($aa as $aaa) {
-            $a = new $aaa;
-            if (method_exists($a, 'getProvider')) {
-                var_dump($a->getProvider());
-            }
-            if (method_exists($a, 'getBaseUrl')) {
-                var_dump($a->getBaseUrl());
-            }
-        }
-
         $this->assertEquals($expected, $current);
     }
 }

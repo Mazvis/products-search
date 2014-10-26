@@ -25,7 +25,7 @@ class CreateProductsTable extends Migration
             $table->string('originalCurrency')->nullable();
             $table->double('convertedPrice')->nullable();
             $table->string('convertedCurrency')->nullable();
-            $table->timestamp('timestamp');
+            $table->integer('timestamp');
 
             $table->timestamps();
         });

@@ -49,5 +49,4 @@ class ProductsParserServiceProvider extends ServiceProvider {
 	{
 		return array();
 	}
-
 }

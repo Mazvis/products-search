@@ -6,7 +6,7 @@ class Currency {
     /** @var string */
     protected $baseCurrency = 'EUR';
     /** @var string */
-    protected $pathToLoad = 'currencies.json';
+    protected $pathToLoad = '../app/data/currencies/currencies.json';
     /** @var array */
     protected $currencies = [];
 

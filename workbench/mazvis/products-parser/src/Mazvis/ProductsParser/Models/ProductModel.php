@@ -13,6 +13,7 @@ class ProductModel extends Eloquent
 	 */
 	protected $table = 'products';
 
+    /** @var array  */
     protected $fillable = [
         'description',
         'images',
@@ -22,7 +23,7 @@ class ProductModel extends Eloquent
         'originalCurrency',
         'convertedPrice',
         'convertedCurrency',
-        'date'
+        'timestamp'
     ];
 
 }

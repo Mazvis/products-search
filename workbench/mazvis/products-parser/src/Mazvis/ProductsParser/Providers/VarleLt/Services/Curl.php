@@ -93,6 +93,7 @@ class Curl extends PageCurl
             $doc->loadHTML($innerHTMLCategory);
 
             $elements = $doc->getElementsByTagName('li');
+            /** @var \DomElement $node */
             foreach($elements as $node){
                 $class = trim($node->getAttribute('class'));
                 if ($class == 'last') {
@@ -108,7 +109,6 @@ class Curl extends PageCurl
         return $category;
     }
 
-
     /**
      * @param string $url
      * @return array
@@ -122,7 +122,6 @@ class Curl extends PageCurl
             $content = $this->tidyService->tidyTheContent($content);
 
             $category = $this->findCategory($content);
-            var_dump($category);
 
             //create dom doc from content
             $doc = new \DOMDocument();

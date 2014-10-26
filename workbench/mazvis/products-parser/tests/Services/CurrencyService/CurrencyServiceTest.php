@@ -16,19 +16,40 @@ class CurrencyServiceTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @param string $fixture
+     *
+     * @return string
+     */
+    public function getContent($fixture)
+    {
+        if (file_exists($fixture)) {
+            return file_get_contents($fixture);
+        }
+
+        return '';
+    }
+
+    /**
      * @param $fixture
      * @return CurrencyService
      */
     public function getCurrencyService($fixture)
     {
-//        $service = $this->getMock(
-//            'Mazvis\ProductsParser\Services\CurrencyService\CurrencyService',
-//            ['isCurrencies']
-//        );
-//        $service->expects($this->any())->method('isCurrencies')->will($this->returnValue(false));
         $service = new CurrencyService();
         $service->setCurrenciesLink($this->getFixturePath($fixture));
-        $service->setPathToSave($this->getFixturePath('saved_currencies.json'));
+        $service->setPathToSave($this->getFixturePath('') . 'dir' . DIRECTORY_SEPARATOR);
+        $service->setFileName('saved_currencies.json');
+
+        // Downloader
+        $downloader = $this->getMock(
+            'Mazvis\ProductsParser\Services\Downloader',
+            ['getContent']
+        );
+        $downloader
+            ->expects($this->any())->method('getContent')
+            ->will($this->returnValue($this->getContent($this->getFixturePath($fixture))));
+
+        $service->setDownloader($downloader);
 
         return $service;
     }

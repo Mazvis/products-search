@@ -9,6 +9,9 @@ class TidyService
     /** @var  tidy */
     protected $tidy;
 
+    /**
+     * Constructor
+     */
     function __construct()
     {
         $this->tidy = new tidy();
@@ -16,6 +19,7 @@ class TidyService
 
     /**
      * Tide the html content
+     *
      * @param $content
      * @return Tidy
      */

@@ -37,4 +37,4 @@ class Downloader
     {
         $this->client = $client;
     }
-} 
+}

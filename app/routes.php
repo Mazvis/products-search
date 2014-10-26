@@ -18,26 +18,8 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
-Route::get('/test', function(){
-    echo ProductsParser::greeting();
-});
-
-Route::get('/curlvarlelt', function(){
-    ProductsParser::curlVarleLtPage();
-});
-
-Route::get('/curlscytech', function(){
-    return ProductsParser::curlVarleLtPage();
-});
-
-Route::get('/getcurrencies', function(){
-    $string = ProductsParser::getCurrencies();
-
-    $bear               = new Product;
-    $bear->title         = $string;
-    $bear->user_id        = 12;
-    // save the bear to the database
-    $bear->save();
+Route::get('/getcurrencies', function() {
+    ProductsParser::getCurrencies();
 });
 
 Route::get('/testdb', array(
@@ -45,6 +27,7 @@ Route::get('/testdb', array(
     'as' => 'execute.products'
 ));
 
-Route::get('/testwb', function(){
-    ProductsParser::writeToDatabase();
+Route::get('/save-varlelt-products_to_db', function(){
+    $parser = new ProductsParser();
+    $parser->writeToDatabase();
 });

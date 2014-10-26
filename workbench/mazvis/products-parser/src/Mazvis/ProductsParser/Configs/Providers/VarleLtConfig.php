@@ -11,12 +11,13 @@ use Mazvis\ProductsParser\Services\TidyService;
 
 class VarleLtConfig
 {
+    /** @var string */
     private $provider = 'varleLt';
-
+    /** @var string */
     private $baseUrl = 'https://www.varle.lt';
-
+    /** @var int */
     private $pageLimit = 1;
-
+    /** @var array  */
     private $categoryMap = [
         'Nešiojami kompiuteriai'  => Product::CATEGORY_LAPTOP,
         'NeÅ¡iojami kompiuteriai' => Product::CATEGORY_LAPTOP,
@@ -25,9 +26,9 @@ class VarleLtConfig
                   kolonÄ—lÄ—s'   => Product::CATEGORY_AUDIO_SPEAKERS,
 
     ];
-
+    /** @var string  */
     private $country = 'Lithuania';
-
+    /** @var array  */
     private $categoryLinks = [
         'https://www.varle.lt/nesiojami-kompiuteriai/nesiojami-kompiuteriai/?sort=price&show=grid',
         'https://www.varle.lt/kompiuteriu-koloneles/?show=grid'
