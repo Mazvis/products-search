@@ -27,7 +27,7 @@ Route::get('/testdb', array(
     'as' => 'execute.products'
 ));
 
-Route::get('/save-varlelt-products_to_db', function(){
+Route::get('/save-varlelt-products-to-db', function(){
     $parser = new ProductsParser();
     $parser->writeToDatabase();
 });

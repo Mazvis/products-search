@@ -15,6 +15,7 @@ class ProductModel extends Eloquent
 
     /** @var array  */
     protected $fillable = [
+        'category',
         'description',
         'images',
         'deepLink',

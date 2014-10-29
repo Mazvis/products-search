@@ -90,4 +90,17 @@ class Parser
         }
         fclose($file);
     }
+
+    protected function deleteOldBackUps($timestamp, $fileName)
+    {
+        var_dump($fileName);
+        var_dump($timestamp);
+        $dir = substr($fileName, 0, strpos($fileName, (string) $timestamp));
+        var_dump($dir);
+        // output all files and directories except for '.' and '..'
+        foreach (new \DirectoryIterator($dir) as $fileInfo) {
+            if($fileInfo->isDot()) continue;
+            echo $fileInfo->getFilename() . "<br>\n";
+        }
+    }
 }

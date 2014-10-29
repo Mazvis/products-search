@@ -5,6 +5,7 @@ namespace Mazvis\ProductsParser;
 use Mazvis\ProductsParser\Configs\DownloaderConfig;
 use Mazvis\ProductsParser\Configs\Providers\VarleLtConfig;
 use Mazvis\ProductsParser\Models\Product;
+use Mazvis\ProductsParser\Models\ProductModel;
 use Mazvis\ProductsParser\Services\CurrencyService\CurrencyService;
 
 class ProductsParser extends Parser
@@ -28,6 +29,9 @@ class ProductsParser extends Parser
         $fileName  = $result[0];
         $timestamp = $result[1];
         $this->readFile($fileName, $timestamp, true);
+
+//        $this->getProductsByCategory(Product::CATEGORY_AUDIO_SPEAKERS);
+//        $this->deleteOldBackUps($timestamp, $fileName);
     }
 
     /**
@@ -75,5 +79,11 @@ class ProductsParser extends Parser
             $product->setDescription($product->getDescription());
             file_put_contents($file, json_encode($product->dump()) . $comma. "\n", FILE_APPEND);
         }
+    }
+
+    protected function getProductsByCategory($category)
+    {
+        $products = ProductModel::where('category', '=', $category)->get();
+        var_dump($products);
     }
 }

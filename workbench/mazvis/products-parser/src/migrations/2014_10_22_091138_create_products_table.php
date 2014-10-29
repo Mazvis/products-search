@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
         {
             $table->increments('id');
 
+            $table->string('category')->nullable();
             $table->text('description')->nullable();
             $table->text('images')->nullable();
             $table->string('deepLink')->nullable();

@@ -215,6 +215,7 @@ class Curl extends PageCurl
         $products = [];
         foreach ($links as $link) {
             $products = array_merge($products, $this->getPageProducts($link));
+            sleep(1);
         }
 
         return $products;
