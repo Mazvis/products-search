@@ -15,6 +15,9 @@ class ProductModel extends Eloquent
 
     /** @var array  */
     protected $fillable = [
+        'provider',
+        'providerQuantity',
+        'name',
         'category',
         'description',
         'images',
@@ -26,5 +29,4 @@ class ProductModel extends Eloquent
         'convertedCurrency',
         'timestamp'
     ];
-
 }

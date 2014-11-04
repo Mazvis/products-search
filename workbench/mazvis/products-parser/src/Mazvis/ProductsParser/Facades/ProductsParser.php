@@ -4,8 +4,8 @@ namespace Mazvis\ProductsParser\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class ProductsParser extends Facade {
-
+class ProductsParser extends Facade
+{
     /**
      * Get the registered name of the component.
      *
@@ -15,5 +15,4 @@ class ProductsParser extends Facade {
     {
         return 'products-parser';
     }
-
 }

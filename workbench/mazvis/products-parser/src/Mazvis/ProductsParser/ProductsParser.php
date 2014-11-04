@@ -5,8 +5,8 @@ namespace Mazvis\ProductsParser;
 use Mazvis\ProductsParser\Configs\DownloaderConfig;
 use Mazvis\ProductsParser\Configs\Providers\VarleLtConfig;
 use Mazvis\ProductsParser\Models\Product;
-use Mazvis\ProductsParser\Models\ProductModel;
 use Mazvis\ProductsParser\Services\CurrencyService\CurrencyService;
+use Mazvis\ProductsParser\Services\DatabaseHelper;
 
 class ProductsParser extends Parser
 {
@@ -29,9 +29,6 @@ class ProductsParser extends Parser
         $fileName  = $result[0];
         $timestamp = $result[1];
         $this->readFile($fileName, $timestamp, true);
-
-//        $this->getProductsByCategory(Product::CATEGORY_AUDIO_SPEAKERS);
-//        $this->deleteOldBackUps($timestamp, $fileName);
     }
 
     /**
@@ -81,9 +78,53 @@ class ProductsParser extends Parser
         }
     }
 
-    protected function getProductsByCategory($category)
+    /**
+     * @return array
+     */
+    public static function getExistingCategories()
     {
-        $products = ProductModel::where('category', '=', $category)->get();
-        var_dump($products);
+        return DataBaseHelper::getExistingCategories();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public static function getProducts()
+    {
+        return DataBaseHelper::getProducts();
+    }
+
+    /**
+     * @param $category
+     * @return array|\Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public static function getProductsByCategory($category)
+    {
+        return DataBaseHelper::getProductsByCategory($category);
+    }
+
+    /**
+     * @param $country
+     * @return array|\Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public static function getProductsByCountry($country)
+    {
+        return DataBaseHelper::getProductsByCountry($country);
+    }
+
+    /**
+     * @return array|\Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public static function getProductsByCostAsc()
+    {
+        return DataBaseHelper::getProductsByCostAsc();
+    }
+
+    /**
+     * @return array|\Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public static function getProductsByCostDesc()
+    {
+        return DataBaseHelper::getProductsByCostDesc();
     }
 }

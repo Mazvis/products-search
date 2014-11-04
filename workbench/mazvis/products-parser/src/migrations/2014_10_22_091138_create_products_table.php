@@ -17,6 +17,9 @@ class CreateProductsTable extends Migration
         {
             $table->increments('id');
 
+            $table->string('provider')->nullable();
+            $table->integer('providerQuantity')->nullable();
+            $table->string('name')->nullable();
             $table->string('category')->nullable();
             $table->text('description')->nullable();
             $table->text('images')->nullable();
@@ -26,7 +29,7 @@ class CreateProductsTable extends Migration
             $table->string('originalCurrency')->nullable();
             $table->double('convertedPrice')->nullable();
             $table->string('convertedCurrency')->nullable();
-            $table->integer('timestamp');
+            $table->integer('timestamp')->nullable();
 
             $table->timestamps();
         });

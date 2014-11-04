@@ -2,7 +2,8 @@
 
 namespace Mazvis\ProductsParser\Services\CurrencyService;
 
-class Currency {
+class Currency
+{
     /** @var string */
     protected $baseCurrency = 'EUR';
     /** @var string */

@@ -17,6 +17,11 @@ class Product
     const CATEGORY_LAPTOP = 'laptop';
     const CATEGORY_AUDIO_SPEAKERS = 'audio_speakers';
 
+    private static $existingCategories = [
+        self::CATEGORY_LAPTOP,
+        self::CATEGORY_AUDIO_SPEAKERS
+    ];
+
     /** @var  string */
     private $description;
     /** @var  array */
@@ -249,6 +254,14 @@ class Product
     public function setOriginalPrice($originalPrice)
     {
         $this->originalPrice = $originalPrice;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getExistingCategories()
+    {
+        return self::$existingCategories;
     }
 
     /**

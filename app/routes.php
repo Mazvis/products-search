@@ -13,21 +13,31 @@
 
 use Mazvis\ProductsParser\ProductsParser;
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+/*--------------------------------------------------------------------------------------------------------------------*/
+// Main program
+/*--------------------------------------------------------------------------------------------------------------------*/
 
-Route::get('/getcurrencies', function() {
-    ProductsParser::getCurrencies();
-});
+// Show home page
+Route::get('/', 'HomeController@showHome');
 
 Route::get('/testdb', array(
     'uses' => 'ProductsController@writeProductsToDatabase',
     'as' => 'execute.products'
 ));
 
+/*--------------------------------------------------------------------------------------------------------------------*/
+// API
+/*--------------------------------------------------------------------------------------------------------------------*/
+Route::get('/get-currencies', function() {
+    ProductsParser::getCurrencies();
+});
+
 Route::get('/save-varlelt-products-to-db', function(){
     $parser = new ProductsParser();
     $parser->writeToDatabase();
+});
+
+// Db routes
+Route::get('/get-existing-categories', function() {
+    ProductsParser::getExistingCategories();
 });
