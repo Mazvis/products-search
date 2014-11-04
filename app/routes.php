@@ -20,10 +20,7 @@ use Mazvis\ProductsParser\ProductsParser;
 // Show home page
 Route::get('/', 'HomeController@showHome');
 
-Route::get('/testdb', array(
-    'uses' => 'ProductsController@writeProductsToDatabase',
-    'as' => 'execute.products'
-));
+Route::get('/category/{categoryName?}', 'HomeController@showByCategory');
 
 /*--------------------------------------------------------------------------------------------------------------------*/
 // API
