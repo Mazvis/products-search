@@ -12,6 +12,7 @@ class ProductModel extends Eloquent
 	 * @var string
 	 */
 	protected $table = 'products';
+    private static $tableName = 'products';
 
     /** @var array  */
     protected $fillable = [
@@ -29,4 +30,12 @@ class ProductModel extends Eloquent
         'convertedCurrency',
         'timestamp'
     ];
+
+    /**
+     * @return string
+     */
+    public static function getTableName()
+    {
+        return self::$tableName;
+    }
 }

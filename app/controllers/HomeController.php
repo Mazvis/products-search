@@ -11,8 +11,9 @@ class HomeController extends BaseController
         $content = $this->layout->content;
         $content->bodyClass = "home-page";
 
-        $content->products = ProductsParser::getProducts();
-        $content->textLikeTitle = 'All products:';
+        $products = ProductsParser::getProducts();
+        $content->products = json_decode($products);
+        $content->textLikeTitle = 'Visi produktai:';
     }
 
     public function showByCategory($categoryName = null)
@@ -25,9 +26,22 @@ class HomeController extends BaseController
         $content->products = [];
         $content->textLikeTitle = 'no found';
         if ($categoryName) {
-            $content->products = ProductsParser::getProductsByCategory($categoryName);
-            $content->textLikeTitle = 'Category "' . $categoryName . '" products:';
+            $products = ProductsParser::getProductsByCategory($categoryName);
+            $content->products = json_decode($products);
+            $content->textLikeTitle = 'Kategorijos "' . $categoryName . '" prekės:';
         }
     }
 
+    public function search()
+    {
+        $content = $this->layout->content;
+
+        $keyword = Input::get('s');
+
+        $content->products = [];
+        $content->textLikeTitle = "Paieška pagal: '" . $keyword . "': ";
+        $products = ProductsParser::doSearch($keyword);
+
+        $this->products = json_decode($products);
+    }
 }

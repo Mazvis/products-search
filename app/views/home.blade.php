@@ -1,7 +1,7 @@
 <article>
-    <h1>Home page</h1>
+    <h1>Pagrindinis</h1>
 
-    <p>{{ $textLikeTitle }}</p>
+    <h3>{{ $textLikeTitle }}</h3>
 
     <div class="row">
         @foreach ($products as $product)

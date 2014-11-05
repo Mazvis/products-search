@@ -44,7 +44,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    {{ HTML::link('/', 'Products cearch', array('class' => 'navbar-brand')) }}
+                    {{ HTML::link('/', 'Prekių paieška', array('class' => 'navbar-brand')) }}
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -59,12 +59,15 @@
 
             <aside class="main-sidebar">
 
-                <div class="photo-search">
-                    {{--{{ Form::open(array('route' => 'search.photo', 'method' => 'post', 'id' => 'search-form')) }}--}}
-                    {{--<input type="search" placeholder="Search photos" class="form-control" name="photo-search-by-tag" id="search" autocomplete="off">--}}
-                    {{--{{ Form::token() }}--}}
-                    {{--{{ Form::close() }}--}}
+                <div class="photo-search sidebar-elements">
+                    <h5>Paieška</h5>
+                    <form class="" method="get" action="search">
+                        <input type="text" class="form-control col-lg-9" name="s" placeholder="Ieškoti">
+                    </form>
                 </div>
+
+                <div class="clear"></div>
+                <hr>
 
                 <div class="photo-search sidebar-elements" style="display:none">
                     <h5>Random product</h5>
@@ -73,11 +76,11 @@
                 </div>
 
                 <div class="photo-search sidebar-elements">
-                    <h5>All categories</h5>
+                    <h5>Visos esamos kategorijos</h5>
                     <div class="thumbnail">
                         <?php $i = 0; ?>
                         @foreach($existingCategories as $existingCategory)
-                        {{ HTML::link('category/'.$existingCategory, $existingCategory) }}@if($i++ < sizeOf($existingCategories)-1), @endif
+                        {{ HTML::link('category/'.$existingCategory->category, $existingCategory->category) }}@if($i++ < sizeOf($existingCategories)-1), @endif
                         @endforeach
                     </div>
                 </div>

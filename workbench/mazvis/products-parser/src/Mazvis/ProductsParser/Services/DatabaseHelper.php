@@ -2,24 +2,33 @@
 
 namespace Mazvis\ProductsParser\Services;
 
-use Mazvis\ProductsParser\Models\Product;
+use Illuminate\Support\Facades\DB;
 use Mazvis\ProductsParser\Models\ProductModel;
 
 class DatabaseHelper
 {
     public static function getExistingCategories()
     {
-        return Product::getExistingCategories();
+        $categories = DB::table(ProductModel::getTableName())->select('category')->distinct()->get();
+        return json_encode($categories);
     }
 
     public static function getProducts()
     {
-        return ProductModel::get();
+        $products = ProductModel::get();
+        return json_encode($products);
     }
 
     public static function getProductsByCategory($category)
     {
-        return ProductModel::where('category', '=', $category)->get();
+        $products = ProductModel::where('category', '=', $category)->orderBy('convertedPrice', 'ASC')->get();
+        return json_encode($products);
+    }
+
+    public static function doSearch($s)
+    {
+        $products = ProductModel::where('description', 'LIKE', "%$s%")->orderBy('convertedPrice', 'desc')->get();
+        return json_encode($products);
     }
 
     public static function getProductsByCountry($country)

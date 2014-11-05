@@ -20,11 +20,11 @@ class BaseController extends Controller
             $this->layout = View::make($this->layout);
             $this->layout->content = '';
             $this->layout->bodyClass = '';
-            $this->layout->title = 'Product search';
+            $this->layout->title = 'Prekių paieška';
 
             //get all products from database
-            $this->layout->existingCategories = ProductsParser::getExistingCategories();
+            $existingCategories = ProductsParser::getExistingCategories();
+            $this->layout->existingCategories = json_decode($existingCategories);
         }
 	}
-
 }

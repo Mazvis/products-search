@@ -104,6 +104,16 @@ class ProductsParser extends Parser
     }
 
     /**
+     * @param $s
+     * @return string
+     */
+    public static function doSearch($s)
+    {
+        $products = DataBaseHelper::doSearch($s);
+        return json_encode($products);
+    }
+
+    /**
      * @param $country
      * @return array|\Illuminate\Database\Eloquent\Collection|static[]
      */

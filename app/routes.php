@@ -22,6 +22,8 @@ Route::get('/', 'HomeController@showHome');
 
 Route::get('/category/{categoryName?}', 'HomeController@showByCategory');
 
+Route::get('/search', 'HomeController@search');
+
 /*--------------------------------------------------------------------------------------------------------------------*/
 // API
 /*--------------------------------------------------------------------------------------------------------------------*/
@@ -29,7 +31,7 @@ Route::get('/get-currencies', function() {
     ProductsParser::getCurrencies();
 });
 
-Route::get('/save-varlelt-products-to-db', function(){
+Route::get('/update', function(){
     $parser = new ProductsParser();
     $parser->writeToDatabase();
 });
