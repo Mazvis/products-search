@@ -9,14 +9,14 @@ class BaseController extends Controller
      */
     protected $layout = 'layouts.master';
 
-	/**
+    /**
 	 * Setup the layout used by the controller.
 	 *
 	 * @return void
 	 */
-	protected function setupLayout()
-	{
-		if (!is_null($this->layout)) {
+    protected function setupLayout()
+    {
+        if (!is_null($this->layout)) {
             $this->layout = View::make($this->layout);
             $this->layout->content = '';
             $this->layout->bodyClass = '';
@@ -26,5 +26,5 @@ class BaseController extends Controller
             $existingCategories = ProductsParser::getExistingCategories();
             $this->layout->existingCategories = json_decode($existingCategories);
         }
-	}
+    }
 }

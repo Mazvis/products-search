@@ -80,4 +80,4 @@ class Currency
     {
         return $this->convertedPrice;
     }
-} 
+}

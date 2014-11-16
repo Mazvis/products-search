@@ -70,7 +70,7 @@ class ProductsParser extends Parser
         $comma = ',';
         /** @var Product $product */
         foreach ($products as $key => $product) {
-            if (($currentLinkKey+1) == $linksCount && ($key+1) == count($products)){
+            if (($currentLinkKey + 1) == $linksCount && ($key + 1) == count($products)) {
                 $comma = '';
             }
             $product->setDescription($product->getDescription());

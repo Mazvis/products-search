@@ -12,7 +12,7 @@ class TidyService
     /**
      * Constructor
      */
-    function __construct()
+    public function __construct()
     {
         $this->tidy = new tidy();
     }

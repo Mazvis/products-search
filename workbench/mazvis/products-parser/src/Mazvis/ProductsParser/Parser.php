@@ -39,7 +39,8 @@ class Parser
      */
     protected function getFilePath($provider, $timestamp)
     {
-        $dir = sprintf('%s%s%s%s%s%s%s%s%s%s%s',
+        $dir = sprintf(
+            '%s%s%s%s%s%s%s%s%s%s%s',
             '..',
             DIRECTORY_SEPARATOR,
             'app',
@@ -100,7 +101,9 @@ class Parser
         $dir = substr($fileName, 0, strpos($fileName, (string) $timestamp));
         // output all files and directories except for '.' and '..'
         foreach (new \DirectoryIterator($dir) as $fileInfo) {
-            if($fileInfo->isDot()) continue;
+            if ($fileInfo->isDot()) {
+                continue;
+            }
             echo $fileInfo->getFilename() . "<br>\n";
         }
     }

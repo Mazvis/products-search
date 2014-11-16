@@ -3,7 +3,6 @@
 use Guzzle\Http\Client;
 use Mazvis\ProductsParser\Models\Product;
 use Mazvis\ProductsParser\Providers\VarleLt\Services\Curl;
-use Mazvis\ProductsParser\Services\CurrencyService\Currency;
 
 class CurlTest extends \PHPUnit_Framework_TestCase
 {
@@ -36,8 +35,9 @@ class CurlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param $fixture
-     * @param bool $pageLimit
+     * @param string|bool $fixture
+     * @param string|bool $pageLimit
+     * @param string|null $fixtures
      *
      * @return Curl
      */
@@ -131,7 +131,9 @@ class CurlTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getTestTotalPageCountData()
      *
-     * @return void
+     * @param $fixture
+     * @param $expected
+     * @param $pageLimit
      */
     public function testTotalPageCount($fixture, $expected, $pageLimit)
     {
@@ -166,7 +168,9 @@ class CurlTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getTestPageLinksData()
      *
-     * @return void
+     * @param $firstPageUrl
+     * @param $totalPages
+     * @param $expected
      */
     public function testPageLinks($firstPageUrl, $totalPages, $expected)
     {
@@ -192,11 +196,17 @@ class CurlTest extends \PHPUnit_Framework_TestCase
         $product = new Product();
         $product->setProvider($this->provider);
         $product->setCategory(Product::CATEGORY_LAPTOP);
-        $product->setDescription('Nešiojamas kompiuteris Acer E5-571 15.6" LED matinis / Intel Core i7-4510U iki 3.1Ghz');
+        $product->setDescription(
+            'Nešiojamas kompiuteris Acer E5-571 15.6" LED matinis /'.
+            ' Intel Core i7-4510U iki 3.1Ghz'
+        );
         $product->setImages(
             ['https://www.varle.lt/static/uploads/products/235x195/26/nes/nesiojamas-kompiuteris-acer-e5-571-156_5.jpg']
         );
-        $product->setDeepLink('https://www.varle.lt/nesiojami-kompiuteriai/nesiojami-kompiuteriai/nesiojamas-kompiuteris-acer-e5-571-156-led-matinis--959338.html');
+        $product->setDeepLink(
+            'https://www.varle.lt/nesiojami-kompiuteriai/nesiojami-kompiuteriai/'.
+            'nesiojamas-kompiuteris-acer-e5-571-156-led-matinis--959338.html'
+        );
         $product->setCountry('Lithuania');
         $product->setOriginalPrice(578.95);
         $product->setOriginalCurrency('EUR');
@@ -208,9 +218,13 @@ class CurlTest extends \PHPUnit_Framework_TestCase
         $product->setCategory(Product::CATEGORY_LAPTOP);
         $product->setDescription('Nešiojamas kompiuteris DELL Inspiron 15 (3542)  15.6" HD LED / Intel Core i5-4210U');
         $product->setImages(
-            ['https://www.varle.lt/static/uploads/products/235x195/26/nes/nesiojamas-kompiuteris-dell-inspiron-15_13.jpg']
+            ['https://www.varle.lt/static/uploads/products/235x195/26/nes/'.
+                'nesiojamas-kompiuteris-dell-inspiron-15_13.jpg']
         );
-        $product->setDeepLink('https://www.varle.lt/nesiojami-kompiuteriai/nesiojami-kompiuteriai/nesiojamas-kompiuteris-dell-inspiron-15-3542-156.html');
+        $product->setDeepLink(
+            'https://www.varle.lt/nesiojami-kompiuteriai/'.
+            'nesiojami-kompiuteriai/nesiojamas-kompiuteris-dell-inspiron-15-3542-156.html'
+        );
         $product->setCountry('Lithuania');
         $product->setOriginalPrice(492.06);
         $product->setOriginalCurrency('EUR');
@@ -224,7 +238,8 @@ class CurlTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getTestPageProductsData()
      *
-     * @return void
+     * @param $fixture
+     * @param $expected
      */
     public function testPageProductData($fixture, $expected)
     {
@@ -254,11 +269,16 @@ class CurlTest extends \PHPUnit_Framework_TestCase
         $product = new Product();
         $product->setProvider($this->provider);
         $product->setCategory(Product::CATEGORY_LAPTOP);
-        $product->setDescription('Nešiojamas kompiuteris Acer E5-571 15.6" LED matinis / Intel Core i7-4510U iki 3.1Ghz');
+        $product->setDescription(
+            'Nešiojamas kompiuteris Acer E5-571 15.6" LED matinis / Intel Core i7-4510U iki 3.1Ghz'
+        );
         $product->setImages(
             ['https://www.varle.lt/static/uploads/products/235x195/26/nes/nesiojamas-kompiuteris-acer-e5-571-156_5.jpg']
         );
-        $product->setDeepLink('https://www.varle.lt/nesiojami-kompiuteriai/nesiojami-kompiuteriai/nesiojamas-kompiuteris-acer-e5-571-156-led-matinis--959338.html');
+        $product->setDeepLink(
+            'https://www.varle.lt/nesiojami-kompiuteriai/nesiojami-kompiuteriai/'.
+            'nesiojamas-kompiuteris-acer-e5-571-156-led-matinis--959338.html'
+        );
         $product->setCountry('Lithuania');
         $product->setOriginalPrice(578.95);
         $product->setOriginalCurrency('EUR');
@@ -270,9 +290,13 @@ class CurlTest extends \PHPUnit_Framework_TestCase
         $product->setCategory(Product::CATEGORY_LAPTOP);
         $product->setDescription('Nešiojamas kompiuteris DELL Inspiron 15 (3542)  15.6" HD LED / Intel Core i5-4210U');
         $product->setImages(
-            ['https://www.varle.lt/static/uploads/products/235x195/26/nes/nesiojamas-kompiuteris-dell-inspiron-15_13.jpg']
+            ['https://www.varle.lt/static/uploads/products/235x195/26/nes/'.
+                'nesiojamas-kompiuteris-dell-inspiron-15_13.jpg']
         );
-        $product->setDeepLink('https://www.varle.lt/nesiojami-kompiuteriai/nesiojami-kompiuteriai/nesiojamas-kompiuteris-dell-inspiron-15-3542-156.html');
+        $product->setDeepLink(
+            'https://www.varle.lt/nesiojami-kompiuteriai/'.
+            'nesiojami-kompiuteriai/nesiojamas-kompiuteris-dell-inspiron-15-3542-156.html'
+        );
         $product->setCountry('Lithuania');
         $product->setOriginalPrice(492.06);
         $product->setOriginalCurrency('EUR');
@@ -282,11 +306,17 @@ class CurlTest extends \PHPUnit_Framework_TestCase
         $product = new Product();
         $product->setProvider($this->provider);
         $product->setCategory(Product::CATEGORY_LAPTOP);
-        $product->setDescription('Nešiojamas kompiuteris Acer E5-571 15.6" LED matinis / Intel Core i7-4510U iki 3.1Ghz');
+        $product->setDescription(
+            'Nešiojamas kompiuteris Acer E5-571 15.6" LED matinis /'.
+            ' Intel Core i7-4510U iki 3.1Ghz'
+        );
         $product->setImages(
             ['https://www.varle.lt/static/uploads/products/235x195/26/nes/nesiojamas-kompiuteris-acer-e5-571-156_5.jpg']
         );
-        $product->setDeepLink('https://www.varle.lt/nesiojami-kompiuteriai/nesiojami-kompiuteriai/nesiojamas-kompiuteris-acer-e5-571-156-led-matinis--959338.html');
+        $product->setDeepLink(
+            'https://www.varle.lt/nesiojami-kompiuteriai/'.
+            'nesiojami-kompiuteriai/nesiojamas-kompiuteris-acer-e5-571-156-led-matinis--959338.html'
+        );
         $product->setCountry('Lithuania');
         $product->setOriginalPrice(578.95);
         $product->setOriginalCurrency('EUR');
@@ -298,9 +328,13 @@ class CurlTest extends \PHPUnit_Framework_TestCase
         $product->setCategory(Product::CATEGORY_LAPTOP);
         $product->setDescription('Nešiojamas kompiuteris DELL Inspiron 15 (3542)  15.6" HD LED / Intel Core i5-4210U');
         $product->setImages(
-            ['https://www.varle.lt/static/uploads/products/235x195/26/nes/nesiojamas-kompiuteris-dell-inspiron-15_13.jpg']
+            ['https://www.varle.lt/static/uploads/products/235x195/26/nes/'.
+                'nesiojamas-kompiuteris-dell-inspiron-15_13.jpg']
         );
-        $product->setDeepLink('https://www.varle.lt/nesiojami-kompiuteriai/nesiojami-kompiuteriai/nesiojamas-kompiuteris-dell-inspiron-15-3542-156.html');
+        $product->setDeepLink(
+            'https://www.varle.lt/nesiojami-kompiuteriai/nesiojami-kompiuteriai/'.
+            'nesiojamas-kompiuteris-dell-inspiron-15-3542-156.html'
+        );
         $product->setCountry('Lithuania');
         $product->setOriginalPrice(500.50);
         $product->setOriginalCurrency('EUR');

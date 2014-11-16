@@ -6,12 +6,12 @@ use Eloquent;
 
 class ProductModel extends Eloquent
 {
-	/**
+     /**
 	 * The database table used by the model.
 	 *
 	 * @var string
 	 */
-	protected $table = 'products';
+    protected $table = 'products';
     private static $tableName = 'products';
 
     /** @var array  */

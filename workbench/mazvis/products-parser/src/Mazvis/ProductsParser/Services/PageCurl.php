@@ -32,7 +32,7 @@ class PageCurl
 
         $tmp_dom = new \DOMDocument();
         foreach ($nodes as $node) {
-            $tmp_dom->appendChild($tmp_dom->importNode($node,true));
+            $tmp_dom->appendChild($tmp_dom->importNode($node, true));
         }
 
         $innerHTML = trim($tmp_dom->saveHTML());

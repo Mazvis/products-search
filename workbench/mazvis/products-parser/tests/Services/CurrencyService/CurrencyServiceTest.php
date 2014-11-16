@@ -1,7 +1,6 @@
 <?php
 
 use Mazvis\ProductsParser\Services\CurrencyService\CurrencyService;
-use Symfony\Component\HttpFoundation\File\File;
 
 class CurrencyServiceTest extends PHPUnit_Framework_TestCase
 {
@@ -97,11 +96,11 @@ class CurrencyServiceTest extends PHPUnit_Framework_TestCase
     /**
      * Delete temp dir
      */
-    private function deteleTempDir() {
+    private function deteleTempDir()
+    {
         $dir = $this->getFixturePath('') . 'dir' . DIRECTORY_SEPARATOR;
         if (file_exists($dir)) {
             exec('rm -rf ' . $dir);
         }
     }
 }
- 

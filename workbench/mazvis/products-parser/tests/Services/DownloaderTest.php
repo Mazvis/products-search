@@ -29,8 +29,8 @@ class DownloaderTest extends PHPUnit_Framework_TestCase
             $mockResponse = new Response(255);
         }
 
-        $mockResponseBody = EntityBody::factory(fopen(
-                $this->getFixturePath($fixture), 'r+')
+        $mockResponseBody = EntityBody::factory(
+            fopen($this->getFixturePath($fixture), 'r+')
         );
         $mockResponse->setBody($mockResponseBody);
 
@@ -64,7 +64,7 @@ class DownloaderTest extends PHPUnit_Framework_TestCase
 
         $out[] = [$fixture, $expected, true];
 
-        // Case #0
+        // Case #1
         $fixture = 'currenciesToDownload.xml';
         $expected = false;
 
@@ -88,4 +88,3 @@ class DownloaderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $actual);
     }
 }
- 

@@ -39,8 +39,8 @@ class VarleLtConfig
     /**
      * @return Curl
      */
-    public function getVarleLtCurlInstance() {
-
+    public function getVarleLtCurlInstance()
+    {
         $varleLtCurl = new Curl();
 
         $options = [

@@ -2,12 +2,12 @@
 
 class RoutesTest extends TestCase
 {
-	public function testIsOkHomeRequest()
-	{
-		$this->client->request('GET', '/');
+    public function testIsOkHomeRequest()
+    {
+        $this->client->request('GET', '/');
 
-		$this->assertTrue($this->client->getResponse()->isOk());
-	}
+        $this->assertTrue($this->client->getResponse()->isOk());
+    }
 
     public function testIsOkNewsRequest()
     {

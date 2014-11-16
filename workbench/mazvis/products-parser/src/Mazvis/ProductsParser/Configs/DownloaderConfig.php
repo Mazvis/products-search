@@ -10,8 +10,8 @@ class DownloaderConfig
     /**
      * @return Downloader
      */
-    public static function getDownloaderInstance() {
-
+    public static function getDownloaderInstance()
+    {
         $client = new Client();
 
         $downloader = new Downloader();

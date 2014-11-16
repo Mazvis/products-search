@@ -60,7 +60,8 @@ class Curl extends PageCurl
      * @param int $totalPageCount
      * @return array
      */
-    public function generatePageLinks($firstPageUrl, $totalPageCount) {
+    public function generatePageLinks($firstPageUrl, $totalPageCount)
+    {
         $links = [];
 
         for ($i = 1; $i <= $totalPageCount; $i++) {
@@ -94,11 +95,11 @@ class Curl extends PageCurl
 
             $elements = $doc->getElementsByTagName('li');
             /** @var \DomElement $node */
-            foreach($elements as $node){
+            foreach ($elements as $node) {
                 $class = trim($node->getAttribute('class'));
                 if ($class == 'last') {
                     $elements = $node->getElementsByTagName('a');
-                    foreach($elements as $el){
+                    foreach ($elements as $el) {
                         $category = trim($el->nodeValue);
                         break; //break 2;
                     }
@@ -113,7 +114,8 @@ class Curl extends PageCurl
      * @param string $url
      * @return array
      */
-    public function getPageProducts($url) {
+    public function getPageProducts($url)
+    {
         $products = [];
 
         $content = $this->downloader->getContent($url);
@@ -136,24 +138,26 @@ class Curl extends PageCurl
             $doc->loadHTML($innerHTML);
 
             $elements = $doc->getElementsByTagName('div');
-            foreach($elements as $node){
+            foreach ($elements as $node) {
                 /** @var \DOMElement $child */
-                foreach($node->childNodes as $child) {
+                foreach ($node->childNodes as $child) {
                     if ($child->nodeName == 'a') {
                         $deepLink = $child->getAttribute('href');
 
                         $product = new Product();
                         $product->setProvider($this->provider);
                         $product->setCountry($this->country);
-                        $product->setCategory(isset($this->categoryMap[$category]) ? $this->categoryMap[$category] : null);
+                        $product->setCategory(
+                            isset($this->categoryMap[$category]) ? $this->categoryMap[$category] : null
+                        );
                         $product->setDeepLink($deepLink);
 
                         /** @var \DOMElement $aChilds */
-                        foreach($child->childNodes as $aChilds) {
+                        foreach ($child->childNodes as $aChilds) {
                             if ($aChilds->nodeName == 'span') {
                                 if ($aChilds->getAttribute('class') == 'img-container') {
                                     /** @var \DOMElement $spanChilds */
-                                    foreach($aChilds->childNodes as $spanChilds) {
+                                    foreach ($aChilds->childNodes as $spanChilds) {
                                         if ($spanChilds->nodeName == 'img') {
                                             $imgLink = $spanChilds->getAttribute('data-original');
                                             if ($imgLink != '') {
@@ -163,8 +167,10 @@ class Curl extends PageCurl
                                     }
                                 } elseif ($aChilds->getAttribute('class') == 'prices') {
                                     /** @var \DOMElement $spanChilds */
-                                    foreach($aChilds->childNodes as $spanChilds) {
-                                        if ($spanChilds->nodeName == 'span' && $spanChilds->getAttribute('class') == 'euro_price') {
+                                    foreach ($aChilds->childNodes as $spanChilds) {
+                                        if ($spanChilds->nodeName == 'span' &&
+                                            $spanChilds->getAttribute('class') == 'euro_price'
+                                        ) {
                                             $euroPrice = $spanChilds->nodeValue;
                                             $euroPrice = substr($euroPrice, strpos($euroPrice, "¬") + 2);
                                             $euroPrice = str_replace(',', '.', $euroPrice);
@@ -181,8 +187,10 @@ class Curl extends PageCurl
                                     }
                                 } elseif ($aChilds->getAttribute('class') == 'title') {
                                     /** @var \DOMElement $spanChilds */
-                                    foreach($aChilds->childNodes as $spanChilds) {
-                                        if ($spanChilds->nodeName == 'span' && $spanChilds->getAttribute('class') == 'inner') {
+                                    foreach ($aChilds->childNodes as $spanChilds) {
+                                        if ($spanChilds->nodeName == 'span' &&
+                                            $spanChilds->getAttribute('class') == 'inner'
+                                        ) {
                                             $description = $spanChilds->nodeValue;
 
                                             $product->setDescription(trim($description));
@@ -191,6 +199,7 @@ class Curl extends PageCurl
                                 }
                             }
                         }
+
                         if ($product->getOriginalPrice() > 0) {
                             $products[] = $product;
                         }
@@ -208,7 +217,8 @@ class Curl extends PageCurl
      *
      * @return array
      */
-    public function curlData($firstPageUrl) {
+    public function curlData($firstPageUrl)
+    {
         $totalPageCount = $this->getTotalPageCount($firstPageUrl);
         $links = $this->generatePageLinks($firstPageUrl, $totalPageCount);
 
