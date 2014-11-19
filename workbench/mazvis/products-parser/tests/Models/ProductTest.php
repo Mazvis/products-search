@@ -2,8 +2,14 @@
 
 use Mazvis\ProductsParser\Models\Product;
 
+/**
+ * Class ProductTest
+ */
 class ProductTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * testing the model dump method
+     */
     public function testDump()
     {
         $expected = [
