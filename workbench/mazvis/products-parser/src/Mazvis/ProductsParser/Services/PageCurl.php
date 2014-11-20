@@ -30,12 +30,12 @@ class PageCurl
         $finder = new \DomXPath($doc);
         $nodes = $finder->query($query);
 
-        $tmp_dom = new \DOMDocument();
+        $tmpDom = new \DOMDocument();
         foreach ($nodes as $node) {
-            $tmp_dom->appendChild($tmp_dom->importNode($node, true));
+            $tmpDom->appendChild($tmpDom->importNode($node, true));
         }
 
-        $innerHTML = trim($tmp_dom->saveHTML());
+        $innerHTML = trim($tmpDom->saveHTML());
 
         return $innerHTML;
     }
