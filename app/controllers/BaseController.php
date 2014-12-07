@@ -29,6 +29,10 @@ class BaseController extends Controller
             //get all existing countries from database
             $existingCountries = ProductsParser::getExistingCountries();
             $this->layout->existingCountries = json_decode($existingCountries);
+
+            //get all existing providers from database
+            $existingProviders = ProductsParser::getExistingProviders();
+            $this->layout->existingProviders = json_decode($existingProviders);
         }
     }
 }

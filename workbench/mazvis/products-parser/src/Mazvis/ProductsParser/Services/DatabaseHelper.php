@@ -19,6 +19,12 @@ class DatabaseHelper
         return json_encode($countries);
     }
 
+    public static function getExistingProviders()
+    {
+        $providers = DB::table(ProductModel::getTableName())->select('provider')->distinct()->get();
+        return json_encode($providers);
+    }
+
     public static function getProducts()
     {
         $products = ProductModel::get();
@@ -31,15 +37,20 @@ class DatabaseHelper
         return json_encode($products);
     }
 
+    public static function getProductsByCountry($country)
+    {
+        return ProductModel::where('country', '=', $country)->get();
+    }
+
+    public static function getProductsByProvider($provider)
+    {
+        return ProductModel::where('provider', '=', $provider)->get();
+    }
+
     public static function doSearch($s)
     {
         $products = ProductModel::where('description', 'LIKE', "%$s%")->orderBy('convertedPrice', 'desc')->get();
         return json_encode($products);
-    }
-
-    public static function getProductsByCountry($country)
-    {
-        return ProductModel::where('country', '=', $country)->get();
     }
 
     public static function getProductsByCostAsc()

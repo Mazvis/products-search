@@ -95,6 +95,14 @@ class ProductsParser extends Parser
     }
 
     /**
+     * @return array
+     */
+    public static function getExistingProviders()
+    {
+        return DataBaseHelper::getExistingProviders();
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public static function getProducts()
@@ -112,22 +120,30 @@ class ProductsParser extends Parser
     }
 
     /**
-     * @param $s
-     * @return string
-     */
-    public static function doSearch($s)
-    {
-        $products = DataBaseHelper::doSearch($s);
-        return json_encode($products);
-    }
-
-    /**
      * @param $country
      * @return array|\Illuminate\Database\Eloquent\Collection|static[]
      */
     public static function getProductsByCountry($country)
     {
         return DataBaseHelper::getProductsByCountry($country);
+    }
+
+    /**
+     * @param $provider
+     * @return array|\Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public static function getProductsByProvider($provider)
+    {
+        return DataBaseHelper::getProductsByProvider($provider);
+    }
+
+    /**
+     * @param $s
+     * @return string
+     */
+    public static function doSearch($s)
+    {
+        return DataBaseHelper::doSearch($s);
     }
 
     /**

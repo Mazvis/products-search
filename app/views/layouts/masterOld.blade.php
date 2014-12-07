@@ -24,15 +24,6 @@
     {{ HTML::script('assets/bootstrap-3.0.0/assets/js/html5shiv.js') }}
     {{ HTML::script('assets/bootstrap-3.0.0/assets/js/respond.min.js') }}
     <![endif]-->
-
-    <style type="text/css">
-        /*.image-to-transform img {*/
-            /*width: 350px; *//*260*/
-            /*height: 150px; *//*122*/
-            /*overflow: hidden;*/
-        /*}*/
-    </style>
-
 </head>
 <body>
     <!-- Navigation -->
@@ -46,24 +37,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Prekių paieška</a>
+                {{ HTML::link('/', Lang::get('menu.'. 'brand'), ['class' => 'navbar-brand']) }}
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">About</a>
+                        <a href="#">{{ Lang::get('menu.'. 'about') }}</a>
                     </li>
                     <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                    <li>
-                        <form class="" method="get" action="search">
-                            <input type="text" class="form-control col-lg-12" name="s" placeholder="Ieškoti">
-                        </form>
+                        <a href="#">{{ Lang::get('menu.'. 'contacts') }}</a>
                     </li>
                 </ul>
             </div>
@@ -78,7 +61,14 @@
         <div class="row">
 
             <div class="col-md-3">
-                <p class="lead">Kategorijos</p>
+                <p class="lead">Paieška</p>
+                <div class="list-group">
+                    <form class="" method="get" action="search">
+                        <input type="text" class="form-control col-lg-12" name="s" placeholder="Ieškoti">
+                    </form>
+                </div>
+
+                <p class="lead">{{ Lang::get('container.'. 'categories') }}</p>
                 <div class="list-group">
                     @foreach($existingCategories as $existingCategory)
                         @if(Lang::has('categories.' . $existingCategory->category))
@@ -89,13 +79,24 @@
                     @endforeach
                 </div>
 
-                <p class="lead">Šalys</p>
+                <p class="lead">{{ Lang::get('container.'. 'countries') }}</p>
                 <div class="list-group">
                     @foreach($existingCountries as $existingCountry)
                         @if(Lang::has('countries.' . $existingCountry->country))
                             {{ HTML::link('country/' . $existingCountry->country, Lang::get('countries.'. $existingCountry->country), ['class' => 'list-group-item']) }}
                         @else
                             {{ HTML::link('country/' . $existingCountry->country, $existingCountry->country, ['class' => 'list-group-item']) }}
+                        @endif
+                    @endforeach
+                </div>
+
+                <p class="lead">{{ Lang::get('container.'. 'providers') }}</p>
+                <div class="list-group">
+                    @foreach($existingProviders as $existingProvider)
+                        @if(Lang::has('providerNames.' . $existingProvider->provider))
+                            {{ HTML::link('provider/' . $existingProvider->provider, Lang::get('providerNames.'. $existingProvider->provider), ['class' => 'list-group-item']) }}
+                        @else
+                            {{ HTML::link('provider/' . $existingProvider->provider, $existingProvider->provider, ['class' => 'list-group-item']) }}
                         @endif
                     @endforeach
                 </div>

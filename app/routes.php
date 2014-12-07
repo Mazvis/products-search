@@ -22,6 +22,7 @@ Route::get('/', 'HomeController@showHome');
 
 Route::get('/category/{categoryName?}', 'HomeController@showByCategory');
 Route::get('/country/{countryName?}', 'HomeController@showByCountry');
+Route::get('/provider/{providerName?}', 'HomeController@showByProvider');
 
 Route::get('/search', 'HomeController@search');
 

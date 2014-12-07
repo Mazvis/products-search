@@ -51,9 +51,27 @@ class HomeController extends BaseController
             $content->textLikeTitle = 'Šalies "' . $countryName . '" prekės:';
         }
     }
+    public function showByProvider($providerName = null)
+    {
+        $this->layout->content = View::make('homeOld');
+
+        $content = $this->layout->content;
+        $content->bodyClass = "home-page";
+
+        $content->products = [];
+        $content->textLikeTitle = 'no found';
+        if ($providerName) {
+            $products = ProductsParser::getProductsByProvider($providerName);
+            $products = json_decode($products);
+            $content->products = $this->getImages($products);
+            $content->textLikeTitle = 'Tiekėjo "' . $providerName . '" prekės:';
+        }
+    }
 
     public function search()
     {
+        $this->layout->content = View::make('homeOld');
+
         $content = $this->layout->content;
 
         $keyword = Input::get('s');
@@ -67,6 +85,10 @@ class HomeController extends BaseController
 
     private function getImages($products)
     {
+        if (empty($products)) {
+            return [];
+        }
+
         $productsNew = $products;
         foreach ($products as $key => $product) {
             $productsNew[$key]->images = json_decode($product->images);
