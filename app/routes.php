@@ -21,6 +21,7 @@ use Mazvis\ProductsParser\ProductsParser;
 Route::get('/', 'HomeController@showHome');
 
 Route::get('/category/{categoryName?}', 'HomeController@showByCategory');
+Route::get('/country/{countryName?}', 'HomeController@showByCountry');
 
 Route::get('/search', 'HomeController@search');
 

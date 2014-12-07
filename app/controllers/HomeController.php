@@ -6,19 +6,21 @@ class HomeController extends BaseController
 {
     public function showHome()
     {
-        $this->layout->content = View::make('home');
+        $this->layout->content = View::make('homeOld');
 
         $content = $this->layout->content;
         $content->bodyClass = "home-page";
 
         $products = ProductsParser::getProducts();
-        $content->products = json_decode($products);
+        $products = json_decode($products);
+        $content->products = $this->getImages($products);
+
         $content->textLikeTitle = 'Visi produktai:';
     }
 
     public function showByCategory($categoryName = null)
     {
-        $this->layout->content = View::make('home');
+        $this->layout->content = View::make('homeOld');
 
         $content = $this->layout->content;
         $content->bodyClass = "home-page";
@@ -27,8 +29,26 @@ class HomeController extends BaseController
         $content->textLikeTitle = 'no found';
         if ($categoryName) {
             $products = ProductsParser::getProductsByCategory($categoryName);
-            $content->products = json_decode($products);
+            $products = json_decode($products);
+            $content->products = $this->getImages($products);
             $content->textLikeTitle = 'Kategorijos "' . $categoryName . '" prekės:';
+        }
+    }
+
+    public function showByCountry($countryName = null)
+    {
+        $this->layout->content = View::make('homeOld');
+
+        $content = $this->layout->content;
+        $content->bodyClass = "home-page";
+
+        $content->products = [];
+        $content->textLikeTitle = 'no found';
+        if ($countryName) {
+            $products = ProductsParser::getProductsByCountry($countryName);
+            $products = json_decode($products);
+            $content->products = $this->getImages($products);
+            $content->textLikeTitle = 'Šalies "' . $countryName . '" prekės:';
         }
     }
 
@@ -41,7 +61,16 @@ class HomeController extends BaseController
         $content->products = [];
         $content->textLikeTitle = "Paieška pagal: '" . $keyword . "': ";
         $products = ProductsParser::doSearch($keyword);
+        $products = json_decode($products);
+        $content->products = $this->getImages($products);
+    }
 
-        $this->products = json_decode($products);
+    private function getImages($products)
+    {
+        $productsNew = $products;
+        foreach ($products as $key => $product) {
+            $productsNew[$key]->images = json_decode($product->images);
+        }
+        return $productsNew;
     }
 }

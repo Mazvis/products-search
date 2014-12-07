@@ -11,8 +11,9 @@
 		"guzzle/guzzle": "~3.7",
 		"guzzlehttp/guzzle": "4.*",
         "squizlabs/php_codesniffer": "dev-master",
-        "phpmd/phpmd" : "@stable"
-	},
+        "phpmd/phpmd" : "@stable",
+        "mews/phpthumb": "dev-master"
+    },
 	"autoload": {
 		"classmap": [
 			"app/commands",

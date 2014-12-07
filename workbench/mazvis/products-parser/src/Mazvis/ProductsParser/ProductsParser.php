@@ -87,6 +87,14 @@ class ProductsParser extends Parser
     }
 
     /**
+     * @return array
+     */
+    public static function getExistingCountries()
+    {
+        return DataBaseHelper::getExistingCountries();
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public static function getProducts()

@@ -13,6 +13,12 @@ class DatabaseHelper
         return json_encode($categories);
     }
 
+    public static function getExistingCountries()
+    {
+        $countries = DB::table(ProductModel::getTableName())->select('country')->distinct()->get();
+        return json_encode($countries);
+    }
+
     public static function getProducts()
     {
         $products = ProductModel::get();

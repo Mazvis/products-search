@@ -194,6 +194,7 @@ class Curl extends PageCurl
                                             $description = $spanChilds->nodeValue;
 
                                             $product->setDescription(trim($description));
+                                            $product->setName(trim($description));
                                         }
                                     }
                                 }

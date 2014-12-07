@@ -7,10 +7,10 @@ class BaseController extends Controller
     /**
      * The layout that should be used for responses.
      */
-    protected $layout = 'layouts.master';
+    protected $layout = 'layouts.masterOld';
 
     /**
-	 * Setup the layout used by the controller.
+	 * Setup the layout used by the controller.s
 	 *
 	 * @return void
 	 */
@@ -22,9 +22,13 @@ class BaseController extends Controller
             $this->layout->bodyClass = '';
             $this->layout->title = 'Prekių paieška';
 
-            //get all products from database
+            //get all existing categories from database
             $existingCategories = ProductsParser::getExistingCategories();
             $this->layout->existingCategories = json_decode($existingCategories);
+
+            //get all existing countries from database
+            $existingCountries = ProductsParser::getExistingCountries();
+            $this->layout->existingCountries = json_decode($existingCountries);
         }
     }
 }

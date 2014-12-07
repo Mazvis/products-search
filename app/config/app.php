@@ -52,7 +52,7 @@ return array(
 	|
 	*/
 
-	'locale' => 'en',
+	'locale' => 'lt',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -122,7 +122,8 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
         'Mazvis\ProductsParser\ProductsParserServiceProvider',
-	),
+        'Mews\Phpthumb\PhpthumbServiceProvider',
+    ),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -149,7 +150,6 @@ return array(
 	*/
 
 	'aliases' => array(
-
 		'App'               => 'Illuminate\Support\Facades\App',
 		'Artisan'           => 'Illuminate\Support\Facades\Artisan',
 		'Auth'              => 'Illuminate\Support\Facades\Auth',
