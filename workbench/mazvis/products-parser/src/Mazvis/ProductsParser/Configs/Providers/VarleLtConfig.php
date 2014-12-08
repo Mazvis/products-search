@@ -22,6 +22,8 @@ class VarleLtConfig
         'Nešiojami kompiuteriai'  => Product::CATEGORY_LAPTOP,
         'NeÅ¡iojami kompiuteriai' => Product::CATEGORY_LAPTOP,
         'Kompiuterių kolonėlės'   => Product::CATEGORY_AUDIO_SPEAKERS,
+        'Kompiuterių
+                  kolonėlės'      => Product::CATEGORY_AUDIO_SPEAKERS,
         'KompiuteriÅ³
                   kolonÄ—lÄ—s'  => Product::CATEGORY_AUDIO_SPEAKERS,
         'Klaviatūros'             => Product::CATEGORY_KEYBOARD,
