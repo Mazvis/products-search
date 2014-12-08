@@ -171,11 +171,17 @@ class Curl extends PageCurl
                                         if ($spanChilds->nodeName == 'span' &&
                                             $spanChilds->getAttribute('class') == 'euro_price'
                                         ) {
+                                            $firstEuroPrice = $spanChilds->nodeValue;
                                             $euroPrice = $spanChilds->nodeValue;
                                             $euroPrice = substr($euroPrice, strpos($euroPrice, "¬") + 2);
                                             $euroPrice = str_replace(',', '.', $euroPrice);
                                             $euroPrice = trim($euroPrice);
                                             $euroPrice = str_replace('€', '', $euroPrice);
+
+                                            if ($euroPrice == '') {
+                                                $euroPrice = trim(substr($firstEuroPrice, 0, 6));
+                                                $euroPrice = str_replace(',', '.', $euroPrice);
+                                            }
 
                                             $product->setOriginalPrice((double) $euroPrice);
                                             $product->setOriginalCurrency('EUR');
@@ -194,7 +200,7 @@ class Curl extends PageCurl
                                             $description = $spanChilds->nodeValue;
 
                                             $product->setDescription(trim($description));
-                                            $product->setName(trim($description));
+//                                            $product->setName(trim($description));
                                         }
                                     }
                                 }

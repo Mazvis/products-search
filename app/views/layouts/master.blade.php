@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="mazvis">
@@ -11,8 +12,9 @@
     <!-- Bootstrap core CSS -->
     {{ HTML::style('assets/bootstrap-3.0.0/dist/css/bootstrap.min.css') }}
 
-    <!-- Style css-->
-    {{ HTML::style('assets/css/style.css') }}
+    <!-- Custom CSS -->
+    {{ HTML::style('assets/css/shop-homepage.css') }}
+
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     {{ HTML::script('assets/bootstrap-3.0.0/assets/js/jquery.js') }}
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
@@ -23,85 +25,139 @@
     {{ HTML::script('assets/bootstrap-3.0.0/assets/js/respond.min.js') }}
     <![endif]-->
 </head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                {{ HTML::link('/', Lang::get('menu.'. 'brand'), ['class' => 'navbar-brand']) }}
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">{{ Lang::get('menu.'. 'about') }}</a>
+                    </li>
+                    <li>
+                        <a href="#">{{ Lang::get('menu.'. 'contacts') }}</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
 
-<body class="{{ $bodyClass }}">
-<div class="container">
+    <!-- Page Content -->
     <div class="container">
 
-        <div class="nav-relative">
-            <nav class="navbar navbar-default navbar-absolute" role="navigation">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button class="toggle-sidebar navbar-toggle" type="button" data-target=".main-sidebar" title="Toggle sidebar">
-                        <span class="sr-only">Toggle sidebar</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" title="Toggle menu">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    {{ HTML::link('/', 'Prekių paieška', array('class' => 'navbar-brand')) }}
-                </div>
+        <div class="row">
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        {{--<li class="@if(Request::is('/'))active@endif">{{ HTML::link('/', 'Home') }}</li>--}}
-                    </ul>
-                </div>
-            </nav>
-        </div>
-        <div class="page-content">
-
-            <aside class="main-sidebar">
-
-                <div class="photo-search sidebar-elements">
-                    <h5>Paieška</h5>
+            <div class="col-md-3">
+                <p class="lead">Paieška</p>
+                <div class="list-group">
                     <form class="" method="get" action="search">
-                        <input type="text" class="form-control col-lg-9" name="s" placeholder="Ieškoti">
+                        <input type="text" class="form-control col-lg-12" name="s" placeholder="Ieškoti">
                     </form>
                 </div>
 
-                <div class="clear"></div>
-                <hr>
-
-                <div class="photo-search sidebar-elements" style="display:none">
-                    <h5>Random product</h5>
-                    <div class="thumbnail">
-                    </div>
+                <p class="lead">{{ Lang::get('container.'. 'categories') }}</p>
+                <div class="list-group">
+                    @foreach($existingCategories as $existingCategory)
+                        @if(Lang::has('categories.' . $existingCategory->category))
+                            {{ HTML::link('category/' . $existingCategory->category, Lang::get('categories.'. $existingCategory->category), ['class' => 'list-group-item']) }}
+                        @else
+                            {{ HTML::link('category/' . $existingCategory->category, $existingCategory->category, ['class' => 'list-group-item']) }}
+                        @endif
+                    @endforeach
                 </div>
 
-                <div class="photo-search sidebar-elements">
-                    <h5>Visos esamos kategorijos</h5>
-                    <div class="thumbnail">
-                        <?php $i = 0; ?>
-                        @foreach($existingCategories as $existingCategory)
-                        {{ HTML::link('category/'.$existingCategory->category, $existingCategory->category) }}@if($i++ < sizeOf($existingCategories)-1), @endif
-                        @endforeach
-                    </div>
+                <p class="lead">{{ Lang::get('container.'. 'countries') }}</p>
+                <div class="list-group">
+                    @foreach($existingCountries as $existingCountry)
+                        @if(Lang::has('countries.' . $existingCountry->country))
+                            {{ HTML::link('country/' . $existingCountry->country, Lang::get('countries.'. $existingCountry->country), ['class' => 'list-group-item']) }}
+                        @else
+                            {{ HTML::link('country/' . $existingCountry->country, $existingCountry->country, ['class' => 'list-group-item']) }}
+                        @endif
+                    @endforeach
                 </div>
 
-                <address class="copyright">
-                    &copy; 2014 Mazvis<sup>xMx</sup>
-                </address>
-
-                <div class="clear"></div>
-            </aside>
-
-            <!-- main content -->
-            <div class="main-content">
-                {{ $content }}
+                <p class="lead">{{ Lang::get('container.'. 'providers') }}</p>
+                <div class="list-group">
+                    @foreach($existingProviders as $existingProvider)
+                        @if(Lang::has('providerNames.' . $existingProvider->provider))
+                            {{ HTML::link('provider/' . $existingProvider->provider, Lang::get('providerNames.'. $existingProvider->provider), ['class' => 'list-group-item']) }}
+                        @else
+                            {{ HTML::link('provider/' . $existingProvider->provider, $existingProvider->provider, ['class' => 'list-group-item']) }}
+                        @endif
+                    @endforeach
+                </div>
             </div>
-            <!-- main content end -->
+
+            <div class="col-md-9">
+
+                <div class="row carousel-holder">
+                    <div class="col-md-12">
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    {{HTML::image('assets/img/slider/laptop.jpg', null, array('class' => 'slide-image'))}}
+                                </div>
+                                <div class="item">
+                                    {{HTML::image('assets/img/slider/phone.jpg', null, array('class' => 'slide-image'))}}
+                                </div>
+                                <div class="item">
+                                    {{HTML::image('assets/img/slider/laptop.jpg', null, array('class' => 'slide-image'))}}
+                                </div>
+                            </div>
+                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                            </a>
+                            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                {{ $content }}
+
+            </div>
 
         </div>
 
     </div>
-</div>
+    <!-- /.container -->
+
+    <div class="container">
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Mažvis, 2014</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
 <!-- Placed at the end of the document so the pages load faster -->
 {{ HTML::script('assets/bootstrap-3.0.0/dist/js/bootstrap.min.js') }}
 {{ HTML::script('assets/bootstrap-3.0.0/dist/js/bootstrap.js') }}
@@ -109,4 +165,5 @@
 {{ HTML::script('assets/bootstrap-3.0.0/assets/js/application.js') }}
 
 </body>
+
 </html>

@@ -37,8 +37,3 @@ Route::get('/update', function(){
     $parser = new ProductsParser();
     $parser->writeToDatabase();
 });
-
-// Db routes
-Route::get('/get-existing-categories', function() {
-    ProductsParser::getExistingCategories();
-});

@@ -4,9 +4,12 @@ use Mazvis\ProductsParser\ProductsParser;
 
 class HomeController extends BaseController
 {
+    /**
+     * Show home page
+     */
     public function showHome()
     {
-        $this->layout->content = View::make('homeOld');
+        $this->layout->content = View::make('home');
 
         $content = $this->layout->content;
         $content->bodyClass = "home-page";
@@ -15,29 +18,37 @@ class HomeController extends BaseController
         $products = json_decode($products);
         $content->products = $this->getImages($products);
 
-        $content->textLikeTitle = 'Visi produktai:';
+        $content->textLikeTitle = 'Visi produktai';
     }
 
+    /**
+     * @param null|string $categoryName
+     */
     public function showByCategory($categoryName = null)
     {
-        $this->layout->content = View::make('homeOld');
+        $this->layout->content = View::make('home');
 
         $content = $this->layout->content;
         $content->bodyClass = "home-page";
 
         $content->products = [];
-        $content->textLikeTitle = 'no found';
+        $content->textLikeTitle = 'Prekių nerasta';
         if ($categoryName) {
             $products = ProductsParser::getProductsByCategory($categoryName);
             $products = json_decode($products);
             $content->products = $this->getImages($products);
-            $content->textLikeTitle = 'Kategorijos "' . $categoryName . '" prekės:';
+            $content->textLikeTitle = Lang::has('categories.' . $categoryName) ?
+                Lang::get('categories.'. $categoryName) : $categoryName;
+            $content->textLikeTitle .= ' Viso(' . count($products) . ')';
         }
     }
 
+    /**
+     * @param null|string $countryName
+     */
     public function showByCountry($countryName = null)
     {
-        $this->layout->content = View::make('homeOld');
+        $this->layout->content = View::make('home');
 
         $content = $this->layout->content;
         $content->bodyClass = "home-page";
@@ -51,9 +62,13 @@ class HomeController extends BaseController
             $content->textLikeTitle = 'Šalies "' . $countryName . '" prekės:';
         }
     }
+
+    /**
+     * @param null|string $providerName
+     */
     public function showByProvider($providerName = null)
     {
-        $this->layout->content = View::make('homeOld');
+        $this->layout->content = View::make('home');
 
         $content = $this->layout->content;
         $content->bodyClass = "home-page";
@@ -68,9 +83,12 @@ class HomeController extends BaseController
         }
     }
 
+    /**
+     * Search by query in DB
+     */
     public function search()
     {
-        $this->layout->content = View::make('homeOld');
+        $this->layout->content = View::make('home');
 
         $content = $this->layout->content;
 
@@ -83,6 +101,11 @@ class HomeController extends BaseController
         $content->products = $this->getImages($products);
     }
 
+    /**
+     * @param array $products
+     *
+     * @return array
+     */
     private function getImages($products)
     {
         if (empty($products)) {
@@ -93,6 +116,7 @@ class HomeController extends BaseController
         foreach ($products as $key => $product) {
             $productsNew[$key]->images = json_decode($product->images);
         }
+
         return $productsNew;
     }
 }

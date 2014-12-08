@@ -7,7 +7,7 @@ class BaseController extends Controller
     /**
      * The layout that should be used for responses.
      */
-    protected $layout = 'layouts.masterOld';
+    protected $layout = 'layouts.master';
 
     /**
 	 * Setup the layout used by the controller.s
