@@ -26,7 +26,7 @@ class TidyService
     public function tidyTheContent($content)
     {
         $options = array('indent' => true);
-        $this->tidy->parseString($content, $options);
+        $this->tidy->parseString($content, $options, 'UTF8');
         $this->tidy->cleanRepair();
 
         return $this->tidy;
